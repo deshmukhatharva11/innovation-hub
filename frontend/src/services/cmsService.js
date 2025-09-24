@@ -3,8 +3,8 @@ import { mockApi } from './mockApi';
 
 // Create axios instance for CMS API
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'https://backend-1cpccsqwi-shris-projects-68144c68.vercel.app/api',
-  timeout: 5000, // 5 second timeout
+  baseURL: process.env.REACT_APP_API_URL || 'https://backend-1cpccsqwi-shris-projects-68144c68.vercel.app',
+  timeout: 10000, // 10 second timeout
 });
 
 // Request interceptor to add token

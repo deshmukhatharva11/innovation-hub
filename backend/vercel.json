@@ -4,7 +4,10 @@
     "api/health.js": {
       "maxDuration": 10
     },
-    "api/circulars.js": {
+    "api/data.js": {
+      "maxDuration": 10
+    },
+    "api/static.js": {
       "maxDuration": 10
     }
   },
@@ -15,11 +18,31 @@
     },
     {
       "src": "/api/public/cms/circulars",
-      "dest": "/api/circulars.js"
+      "dest": "/api/data.js"
+    },
+    {
+      "src": "/api/public/cms/statistics",
+      "dest": "/api/data.js"
+    },
+    {
+      "src": "/api/public/cms/colleges",
+      "dest": "/api/data.js"
+    },
+    {
+      "src": "/api/public/cms/documents",
+      "dest": "/api/data.js"
+    },
+    {
+      "src": "/uploads/(.*)",
+      "dest": "/api/static.js"
+    },
+    {
+      "src": "/images/(.*)",
+      "dest": "/api/static.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/api/health.js"
+      "dest": "/api/data.js"
     }
   ]
 }
