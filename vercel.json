@@ -2,12 +2,15 @@
   "version": 2,
   "builds": [
     {
-      "src": "backend/server-production.js",
-      "use": "@vercel/node"
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
     },
     {
-      "src": "frontend/build/**",
-      "use": "@vercel/static"
+      "src": "backend/server-production.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -21,6 +24,7 @@
     }
   ],
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "DB_TYPE": "postgresql"
   }
 }
