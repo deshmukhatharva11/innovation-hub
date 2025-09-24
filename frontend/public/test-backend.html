@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Connection Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .success { color: green; }
+        .error { color: red; }
+        .info { color: blue; }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #0056b3; }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Backend Connection Test</h1>
+    
+    <div class="test-section">
+        <h2>Backend Health Check</h2>
+        <p>Testing connection to backend server...</p>
+        <button onclick="testHealth()">Test Health Endpoint</button>
+        <button onclick="testAuth()">Test Auth Endpoint</button>
+        <button onclick="testAll()">Test All Endpoints</button>
+        <div id="health-result" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>API Configuration</h2>
+        <p><strong>Base URL:</strong> <span id="base-url"></span></p>
+        <p><strong>Current Time:</strong> <span id="current-time"></span></p>
+    </div>
+
+    <div class="test-section">
+        <h2>Network Information</h2>
+        <p><strong>User Agent:</strong> <span id="user-agent"></span></p>
+        <p><strong>Protocol:</strong> <span id="protocol"></span></p>
+        <p><strong>Host:</strong> <span id="host"></span></p>
+    </div>
+
+    <script>
+        // Display current configuration
+        document.getElementById('base-url').textContent = 'http://localhost:3001/api';
+        document.getElementById('current-time').textContent = new Date().toLocaleString();
+        document.getElementById('user-agent').textContent = navigator.userAgent;
+        document.getElementById('protocol').textContent = window.location.protocol;
+        document.getElementById('host').textContent = window.location.host;
+
+        async function testHealth() {
+            const resultDiv = document.getElementById('health-result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<div class="info">🔄 Testing health endpoint...</div>';
+            
+            try {
+                const response = await fetch('http://localhost:3001/api/health', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    mode: 'cors'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    resultDiv.innerHTML = `<div class="success">✅ Health check successful!<br>Response: ${JSON.stringify(data, null, 2)}</div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="error">❌ Health check failed!<br>Status: ${response.status} ${response.statusText}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Health check error!<br>Error: ${error.message}</div>`;
+            }
+        }
+
+        async function testAuth() {
+            const resultDiv = document.getElementById('health-result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<div class="info">🔄 Testing auth endpoint...</div>';
+            
+            try {
+                const response = await fetch('http://localhost:3001/api/auth/me', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer test-token'
+                    },
+                    mode: 'cors'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    resultDiv.innerHTML = `<div class="success">✅ Auth endpoint accessible!<br>Response: ${JSON.stringify(data, null, 2)}</div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="error">❌ Auth endpoint failed!<br>Status: ${response.status} ${response.statusText}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Auth endpoint error!<br>Error: ${error.message}</div>`;
+            }
+        }
+
+        async function testAll() {
+            const resultDiv = document.getElementById('health-result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<div class="info">🔄 Testing all endpoints...</div>';
+            
+            const endpoints = [
+                { name: 'Health', url: 'http://localhost:3001/api/health' },
+                { name: 'Auth', url: 'http://localhost:3001/api/auth/me' },
+                { name: 'Analytics', url: 'http://localhost:3001/api/analytics/dashboard' },
+                { name: 'Ideas', url: 'http://localhost:3001/api/ideas' }
+            ];
+            
+            let results = [];
+            
+            for (const endpoint of endpoints) {
+                try {
+                    const response = await fetch(endpoint.url, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        mode: 'cors'
+                    });
+                    
+                    results.push(`<div class="success">✅ ${endpoint.name}: ${response.status} ${response.statusText}</div>`);
+                } catch (error) {
+                    results.push(`<div class="error">❌ ${endpoint.name}: ${error.message}</div>`);
+                }
+            }
+            
+            resultDiv.innerHTML = results.join('<br>');
+        }
+    </script>
+</body>
+</html>

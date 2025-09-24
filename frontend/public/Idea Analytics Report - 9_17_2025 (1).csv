@@ -1,0 +1,40 @@
+Report Information
+Report ID,42
+Title,Idea Analytics Report - 9/17/2025
+Type,idea_analytics
+Status,completed
+Generated,17/9/2025, 12:46:17 am
+
+Summary Statistics
+Metric,Value
+Total Ideas,1992
+Evaluated Ideas,1390
+Forwarded Ideas,6
+Incubated Ideas,6
+
+Raw Data (JSON)
+Data
+"{
+  ""period"": {
+    ""start"": ""2025-09-01T00:00:00.000Z"",
+    ""end"": ""2025-09-14T00:00:00.000Z""
+  },
+  ""total_ideas"": 1992,
+  ""status_distribution"": {
+    ""draft"": 0,
+    ""submitted"": 595,
+    ""under_review"": 0,
+    ""endorsed"": 1390,
+    ""incubated"": 6,
+    ""rejected"": 1
+  },
+  ""summary"": {
+    ""totalIdeas"": 1992,
+    ""evaluatedIdeas"": 1390,
+    ""forwardedIdeas"": 6,
+    ""incubatedIdeas"": 6
+  },
+  ""category_analysis"": {},
+  ""department_analysis"": {},
+  ""year_analysis"": {}
+}"

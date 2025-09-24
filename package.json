@@ -1,0 +1,29 @@
+{
+  "name": "innovation-hub",
+  "version": "1.0.0",
+  "description": "Innovation Hub - Pre-Incubation Centre Management System",
+  "main": "backend/server-production.js",
+  "scripts": {
+    "start": "cd backend && node server-production.js",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\"",
+    "build": "cd frontend && npm run build",
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "deploy": "npm run build && npm start"
+  },
+  "keywords": [
+    "innovation",
+    "hub",
+    "incubation",
+    "management",
+    "system"
+  ],
+  "author": "Innovation Hub Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

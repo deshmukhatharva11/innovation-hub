@@ -1,0 +1,221 @@
+{
+  "timestamp": "2025-09-12T17:33:38.112Z",
+  "summary": {
+    "passed": 10,
+    "failed": 0,
+    "successRate": "100.0"
+  },
+  "details": [
+    {
+      "test": "Server Health Check",
+      "status": "PASSED",
+      "details": "Server is running"
+    },
+    {
+      "test": "Database Tables Check",
+      "status": "PASSED",
+      "details": [
+        {
+          "endpoint": "/api/users",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/ideas",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/colleges",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/incubators",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/notifications",
+          "working": true,
+          "status": 401
+        }
+      ]
+    },
+    {
+      "test": "Authentication System",
+      "status": "PASSED",
+      "details": {
+        "login": {
+          "status": 401,
+          "working": true
+        },
+        "register": {
+          "status": 400,
+          "working": true
+        }
+      }
+    },
+    {
+      "test": "Ideas Module End-to-End",
+      "status": "PASSED",
+      "details": [
+        {
+          "endpoint": "/api/ideas",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/ideas/review",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/ideas/my",
+          "working": true,
+          "status": 401
+        }
+      ]
+    },
+    {
+      "test": "Incubator Manager Routes",
+      "status": "PASSED",
+      "details": [
+        {
+          "endpoint": "/api/incubator-manager/my-incubator",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/incubator-manager/ideas/endorsed",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/incubator-manager/colleges",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/pre-incubatees",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/pre-incubatees/statistics/overview",
+          "working": true,
+          "status": 401
+        }
+      ]
+    },
+    {
+      "test": "Reports System",
+      "status": "PASSED",
+      "details": [
+        {
+          "endpoint": "/api/college-coordinator/reports",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/analytics",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/notifications",
+          "working": true,
+          "status": 401
+        }
+      ]
+    },
+    {
+      "test": "Events and Documents",
+      "status": "PASSED",
+      "details": [
+        {
+          "endpoint": "/api/events",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/documents",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/student-events",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/student-documents",
+          "working": true,
+          "status": 401
+        }
+      ]
+    },
+    {
+      "test": "Super Admin Routes",
+      "status": "PASSED",
+      "details": [
+        {
+          "endpoint": "/api/admin/users",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/admin/colleges",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/admin/incubators",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/admin/settings",
+          "working": true,
+          "status": 401
+        }
+      ]
+    },
+    {
+      "test": "Database Relationships",
+      "status": "PASSED",
+      "details": [
+        {
+          "endpoint": "/api/ideas/review",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/college-coordinator/students",
+          "working": true,
+          "status": 401
+        },
+        {
+          "endpoint": "/api/incubator-manager/colleges",
+          "working": true,
+          "status": 401
+        }
+      ]
+    },
+    {
+      "test": "File Operations",
+      "status": "PASSED",
+      "details": {
+        "upload": {
+          "status": 401,
+          "working": true
+        },
+        "download": {
+          "status": 401,
+          "working": true
+        }
+      }
+    }
+  ],
+  "errors": []
+}

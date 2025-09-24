@@ -1,0 +1,37 @@
+1. Student Dashboard
+ Main Features:
+SectionDescriptionProfilePersonal details (Name, DOB, Mob no., Email, Collage name, Course perusing, year )Idea SubmissionSubmit startup idea with structured form: Title, summary, problem, solution, target market, team members, technology used, etc.My IdeasList of submitted ideas with status: Submitted, Under Review, Approved, Rejected, Forwarded.Feedback & CommentsView feedback and evaluation comments from College Coordinator and NIC.Edit IdeaOption to edit idea until evaluated.Documents UploadUpload relevant documents like pitch deck, business model canvas, video pitch.Events & ActivitiesCalendar of upcoming events, webinars, Ideathons, ED programs, etc.ResourcesDownloadable templates: Business Plan, Idea Canvas, IPR Info, etc.NotificationsAlerts for feedback, deadlines, forwarded status, event invites.Chat/Query SystemDirect query window to communicate with the college coordinator.
+2. College Coordinator Dashboard (PIC Monitoring Committee)
+Main Features:
+SectionDescriptionCoordinator ProfileName of PIC cordinator, college name, district,  designation, mob no, email, Idea PoolView all ideas submitted by students of their college.Evaluate IdeasProvide ratings, comments, recommendations (Nurture / Forward / Reject).Nurture IdeasMark ideas for handholding: Assign mentors, schedule sessions.Forward to Incubation CentreFinalize selected ideas to forward to SGBAU Incubation Centre.Idea Progress TrackerView the status of all ideas: New, Evaluated, In Nurture, Forwarded.Events/Programs ManagementAdd/update activities like webinars, Ideathons, etc. that showcase to their students Reports SubmissionSubmit biannual report (January/July) and annual progress report.Download ReportsAuto-generated college-wise summary reports.Student Engagement AnalyticsNumber of students participated, ideas submitted, ideas forwarded.NotificationsAlerts for pending evaluations, events, and reporting deadlines.Document RepositoryAccess university circulars, event posters, evaluation templates, etc.
+
+3. Incubation Centre Dashboard (SGBAU Research & Incubation Foundation)
+Main Features:
+SectionDescriptionAdmin ProfileDetails of Incubation Centre user (Manager, CEO, etc.).Forwarded IdeasView list of all ideas forwarded by affiliated colleges.Review Panel AccessAllocate ideas to university-level by college Evaluation Committee have a access to see the review Pre-Incubatees TrackerTrack pre-incubatees' progress toward incubation Evaluation CommentsAdd expert feedback and final decision (Select for Incubation / Re-evaluate).Annual ReportsCompile data for university reporting: total ideas, colleges involved, funding, etc.College-Wise ReportsDownload individual college reports, feedback summaries.Mentor DatabaseAdd/View mentors and assign them to specific pre-incubatees.NotificationsAutomated alerts for new ideas, report submissions, deadlines.Portal SettingsUpdate forms, fields, templates, Add/update event calendar.ReportDownload report, Students data, college data 
+4. Super Admin Dashboard
+Main Features:
+SectionDescriptionUser ManagementAdd/remove/manage users: Students, Coordinators, Incubation Centre staff.College OnboardingAdd new affiliated colleges/departments with PIC status.Global AnalyticsTotal ideas submitted, evaluated, nurtured, incubated – across all colleges.Portal ConfigurationSet deadlines, customize idea forms, update downloadable resources.Audit TrailLogs of every activity by every user – for transparency and compliance.Backup & Data SecurityManual & scheduled data backup tools, data export options.Domain & Email SettingsSetup email notifications, login issues, password resets, etc.CMS Page EditorEdit content of home page, about page, contact info, help section.University Circulars UploadUpload official documents for all users.Broadcast AnnouncementsSend university-wide or college-specific alerts and announcements.
+
+
+Sant Gagge Baba Amravati University Pre-Incubation Centre 
+1. Header Section (Sticky)
+
+ElementDescriptionUniversity LogoTop left – SGBAU logoPortal Title“SGBAU Pre-Incubation Centre Portal” or “SGBAU Innovation Hub”Navigation MenuHomeLogin ButtonLogin dropdown (Student, College Coordinator, Incubation Centre, Admin)
+3. About the Initiative
+
+FeatureDescriptionHeadingAbout Pre-Incubation Centres (PICs)
+Pre-Incubation Centres (PICs) are innovation-focused center established in university departments, affiliated colleges, and recognized institutions under Sant Gadge Baba Amravati University. Their primary objective is to identify, nurture, and support innovative ideas from students and researchers at the grassroots level. These centres provide a structured environment where ideas can be transformed into Minimum Viable Products (MVPs) through mentoring, workshops, and technical support. All PICs function as sub-centres of the SGBAU Research & Incubation Foundation and help create a seamless pipeline for budding entrepreneurs toward full incubation and startup development.
+ 4. List  of Participating Colleges district wise 
+
+FeatureDescriptionTitleColleges with Active Pre-Incubation CentresSearch/FilterBy district, college name
+ 5. Upcoming Events / Announcements
+
+FeatureDescriptionCarousel or List ViewShow 3–4 upcoming programs: Ideathons, Bootcamps, ED WorkshopsRegister ButtonDirect registration or login promptPast Events ButtonLeads to archive of previous events with reports/photos
+7. Portal Statistics (Live Counter)
+
+MetricExampleTotal Ideas Submitted245Colleges Onboarded57Pre-Incubatees Forwarded68Ideas Incubated12
+ 8. Testimonials / Success Stories
+
+9. Contact Us
+
+FeatureDescriptionAddressSGBAU Research & Incubation Foundation, University Campus, Amravatihttps://incubationsgbau.ac.in/ 

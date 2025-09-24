@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: innovation-hub
+    env: node
+    plan: free
+    buildCommand: npm run install-all && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: DB_TYPE
+        value: postgres
+    disk:
+      name: innovation-hub-disk
+      mountPath: /opt/render/project/backend/uploads
+      sizeGB: 1
+
+databases:
+  - name: innovation-hub-db
+    plan: free
+    databaseName: innovation_hub
+    user: innovation_hub_user

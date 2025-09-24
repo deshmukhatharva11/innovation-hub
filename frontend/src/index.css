@@ -1,0 +1,332 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary-200 hover:bg-secondary-300 text-secondary-800 font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+
+  .btn-outline {
+    @apply border border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+
+  .input-field {
+    @apply w-full px-3 py-2 border border-secondary-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+  }
+
+  .card {
+    @apply bg-white dark:bg-secondary-800 rounded-lg shadow-md border border-secondary-200 dark:border-secondary-700;
+  }
+
+  .sidebar-link {
+    @apply flex items-center px-4 py-2 text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-700 rounded-lg transition-colors duration-200;
+  }
+
+  .sidebar-link.active {
+    @apply bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300;
+  }
+
+  .text-truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+    line-height: 1.3;
+    text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+  }
+
+  .text-truncate-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+    line-height: 1.4;
+    text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+  }
+
+  .text-truncate-4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+    line-height: 1.4;
+    text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+  }
+
+  /* Ensure proper text truncation with ellipsis */
+  .idea-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-all;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.4;
+    text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+    max-height: 5.6rem; /* 4 lines * 1.4 line-height */
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .idea-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.3;
+    text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+    max-height: 2.6rem; /* 2 lines * 1.3 line-height */
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 1.3rem; /* Ensure at least one line is visible */
+  }
+
+  /* Additional aggressive text breaking for very long strings */
+  .idea-description,
+  .idea-title {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  /* Ensure titles are always visible */
+  .idea-title {
+    min-height: 1.3rem !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* Fallback for titles that might be completely hidden */
+  .idea-card h3.idea-title {
+    display: block !important;
+    min-height: 1.3rem !important;
+    max-height: 2.6rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Force text to break even in very long strings */
+  .idea-description {
+    overflow-wrap: anywhere;
+    word-break: break-all;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Ultra-aggressive text containment */
+  .idea-card {
+    contain: layout style;
+    overflow: hidden;
+  }
+
+  .idea-card * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Specific fix for very long strings without spaces */
+  .idea-description {
+    word-break: break-all !important;
+    overflow-wrap: anywhere !important;
+    hyphens: none !important;
+    white-space: normal !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    -webkit-text-overflow: ellipsis !important;
+    max-height: 5.6rem !important;
+    line-height: 1.4 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Ultra-aggressive containment for idea cards */
+  .idea-card {
+    contain: layout style size !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  .idea-card .idea-description {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  /* Nuclear option - force text to respect container */
+  .idea-card p.idea-description {
+    word-break: break-all !important;
+    overflow-wrap: anywhere !important;
+    white-space: pre-wrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    max-height: 5.6rem !important;
+    line-height: 1.4 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Final solution - force text to wrap and truncate */
+  .idea-card .idea-description {
+    word-break: break-all !important;
+    overflow-wrap: anywhere !important;
+    white-space: normal !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    max-height: 5.6rem !important;
+    line-height: 1.4 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    contain: layout !important;
+  }
+
+  /* Fallback for browsers that don't support webkit-line-clamp */
+  @supports not (-webkit-line-clamp: 4) {
+    .idea-description {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-height: 1.4rem;
+    }
+  }
+
+  @supports not (-webkit-line-clamp: 2) {
+    .idea-title {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+      max-height: 2.6rem;
+      line-height: 1.3;
+    }
+  }
+}
+
+/* Home page animations */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-secondary-100 dark:bg-secondary-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-secondary-400 dark:bg-secondary-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-secondary-500 dark:bg-secondary-500;
+}

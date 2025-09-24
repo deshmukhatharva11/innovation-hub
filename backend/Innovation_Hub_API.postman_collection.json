@@ -1,0 +1,775 @@
+{
+  "info": {
+    "name": "Innovation Hub API",
+    "description": "Complete API collection for Innovation Hub Management System",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{auth_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3001/api",
+      "type": "string"
+    },
+    {
+      "key": "auth_token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"student\",\n  \"college_id\": 1,\n  \"department\": \"Computer Science\",\n  \"phone\": \"+91-9876543210\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    pm.environment.set('auth_token', response.data.access_token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@innovationhub.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/auth/me",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "me"]
+            }
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refresh_token\": \"{{refresh_token}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/refresh",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "refresh"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/auth/logout",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/users?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["users"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/users/1",
+              "host": ["{{base_url}}"],
+              "path": ["users", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Name\",\n  \"bio\": \"Updated bio\",\n  \"phone\": \"+91-9876543211\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/users/1",
+              "host": ["{{base_url}}"],
+              "path": ["users", "1"]
+            }
+          }
+        },
+        {
+          "name": "Upload Profile Image",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "profile_image",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/users/1/profile-image",
+              "host": ["{{base_url}}"],
+              "path": ["users", "1", "profile-image"]
+            }
+          }
+        },
+        {
+          "name": "Get Students",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/users/students?college_id=1",
+              "host": ["{{base_url}}"],
+              "path": ["users", "students"],
+              "query": [
+                {
+                  "key": "college_id",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ideas",
+      "item": [
+        {
+          "name": "Get All Ideas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/ideas?page=1&limit=10&status=submitted",
+              "host": ["{{base_url}}"],
+              "path": ["ideas"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "status",
+                  "value": "submitted"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Idea by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/ideas/1",
+              "host": ["{{base_url}}"],
+              "path": ["ideas", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Idea",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Test Idea\",\n  \"description\": \"This is a test idea description\",\n  \"category\": \"Technology\",\n  \"team_size\": 3,\n  \"funding_required\": 100000,\n  \"timeline\": \"6 months\",\n  \"problem_statement\": \"Test problem statement\",\n  \"solution_approach\": \"Test solution approach\",\n  \"market_potential\": \"High market potential\",\n  \"technical_feasibility\": \"High technical feasibility\",\n  \"business_model\": \"SaaS subscription\",\n  \"competitive_analysis\": \"Limited competition\",\n  \"risk_assessment\": \"Low risk\",\n  \"success_metrics\": [\"User adoption\", \"Revenue growth\"],\n  \"tags\": [\"AI\", \"Technology\"]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/ideas",
+              "host": ["{{base_url}}"],
+              "path": ["ideas"]
+            }
+          }
+        },
+        {
+          "name": "Update Idea",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Test Idea\",\n  \"description\": \"Updated description\",\n  \"funding_required\": 150000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/ideas/1",
+              "host": ["{{base_url}}"],
+              "path": ["ideas", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Idea Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"under_review\",\n  \"reviewer_notes\": \"Under review by committee\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/ideas/1/status",
+              "host": ["{{base_url}}"],
+              "path": ["ideas", "1", "status"]
+            }
+          }
+        },
+        {
+          "name": "Upload Idea Files",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "files",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "description",
+                  "value": "Test file upload",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/ideas/1/files",
+              "host": ["{{base_url}}"],
+              "path": ["ideas", "1", "files"]
+            }
+          }
+        },
+        {
+          "name": "Add Team Member",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Team Member\",\n  \"role\": \"Developer\",\n  \"email\": \"member@example.com\",\n  \"phone\": \"+91-9876543212\",\n  \"department\": \"Computer Science\",\n  \"year_of_study\": 3,\n  \"skills\": [\"JavaScript\", \"React\"],\n  \"contribution_percentage\": 25\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/ideas/1/team-members",
+              "host": ["{{base_url}}"],
+              "path": ["ideas", "1", "team-members"]
+            }
+          }
+        },
+        {
+          "name": "Add Comment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"This is a test comment on the idea.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/ideas/1/comments",
+              "host": ["{{base_url}}"],
+              "path": ["ideas", "1", "comments"]
+            }
+          }
+        },
+        {
+          "name": "Like Idea",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"like_type\": \"like\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/ideas/1/likes",
+              "host": ["{{base_url}}"],
+              "path": ["ideas", "1", "likes"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Colleges",
+      "item": [
+        {
+          "name": "Get All Colleges",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/colleges?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["colleges"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get College by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/colleges/1",
+              "host": ["{{base_url}}"],
+              "path": ["colleges", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create College",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test College\",\n  \"address\": \"Test Address\",\n  \"contact_email\": \"test@college.edu\",\n  \"website\": \"https://testcollege.edu\",\n  \"phone\": \"+91-1234567890\",\n  \"city\": \"Test City\",\n  \"state\": \"Test State\",\n  \"country\": \"India\",\n  \"postal_code\": \"123456\",\n  \"established_year\": 2020,\n  \"description\": \"Test college description\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/colleges",
+              "host": ["{{base_url}}"],
+              "path": ["colleges"]
+            }
+          }
+        },
+        {
+          "name": "Update College",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Test College\",\n  \"description\": \"Updated description\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/colleges/1",
+              "host": ["{{base_url}}"],
+              "path": ["colleges", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Incubators",
+      "item": [
+        {
+          "name": "Get All Incubators",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/incubators?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["incubators"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Incubator by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/incubators/1",
+              "host": ["{{base_url}}"],
+              "path": ["incubators", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Incubator",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test Incubator\",\n  \"description\": \"Test incubator description\",\n  \"focus_areas\": [\"Technology\", \"AI\"],\n  \"address\": \"Test Address\",\n  \"contact_email\": \"test@incubator.com\",\n  \"website\": \"https://testincubator.com\",\n  \"phone\": \"+91-1234567890\",\n  \"city\": \"Test City\",\n  \"state\": \"Test State\",\n  \"country\": \"India\",\n  \"established_year\": 2020,\n  \"capacity\": 20,\n  \"funding_available\": 1000000,\n  \"services_offered\": [\"Mentoring\", \"Funding\"]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/incubators",
+              "host": ["{{base_url}}"],
+              "path": ["incubators"]
+            }
+          }
+        },
+        {
+          "name": "Get Incubator Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/incubators/1/statistics",
+              "host": ["{{base_url}}"],
+              "path": ["incubators", "1", "statistics"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Get Dashboard Analytics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/analytics/dashboard?period=30d",
+              "host": ["{{base_url}}"],
+              "path": ["analytics", "dashboard"],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "30d"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Idea Analytics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/analytics/ideas?period=30d&category=Technology",
+              "host": ["{{base_url}}"],
+              "path": ["analytics", "ideas"],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "30d"
+                },
+                {
+                  "key": "category",
+                  "value": "Technology"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get User Analytics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/analytics/users?period=30d",
+              "host": ["{{base_url}}"],
+              "path": ["analytics", "users"],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "30d"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Engagement Analytics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/analytics/engagement?period=30d",
+              "host": ["{{base_url}}"],
+              "path": ["analytics", "engagement"],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "30d"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "Get Notifications",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/notifications?page=1&limit=20",
+              "host": ["{{base_url}}"],
+              "path": ["notifications"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Unread Count",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/notifications/unread-count",
+              "host": ["{{base_url}}"],
+              "path": ["notifications", "unread-count"]
+            }
+          }
+        },
+        {
+          "name": "Mark Notification as Read",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/notifications/1/read",
+              "host": ["{{base_url}}"],
+              "path": ["notifications", "1", "read"]
+            }
+          }
+        },
+        {
+          "name": "Mark All Notifications as Read",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/notifications/read-all",
+              "host": ["{{base_url}}"],
+              "path": ["notifications", "read-all"]
+            }
+          }
+        },
+        {
+          "name": "Get Notification Preferences",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/notifications/preferences",
+              "host": ["{{base_url}}"],
+              "path": ["notifications", "preferences"]
+            }
+          }
+        },
+        {
+          "name": "Update Notification Preferences",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email_notifications\": true,\n  \"push_notifications\": true,\n  \"idea_updates\": true,\n  \"comments\": true,\n  \"likes\": false,\n  \"endorsements\": true,\n  \"weekly_digest\": false\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/notifications/preferences",
+              "host": ["{{base_url}}"],
+              "path": ["notifications", "preferences"]
+            }
+          }
+        },
+        {
+          "name": "Send Test Email",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/notifications/test-email",
+              "host": ["{{base_url}}"],
+              "path": ["notifications", "test-email"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "status": "commited",
+  "type": "backend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:3000",
+  "backendAuthType": "basic token",
+  "backendUsername": "arjun.singh@gcoea.ac.in",
+  "backendPassword": "password123",
+  "executionArgs": {
+    "projectName": "innovation hub",
+    "projectPath": "D:\\Projects\\innovation hub",
+    "testIds": [],
+    "additionalInstruction": "Focus on college admin module specifically: 1. Login as college admin 2. Navigate to college dashboard 3. Check student management functionality 4. Test idea endorsement workflow 5. Verify profile management 6. Test analytics and department data fetching. Make sure all APIs are working correctly and there are no loading issues or errors in the college admin dashboard.",
+    "envs": {
+      "API_KEY": "sk-user-GqM8M78PvuhSqYd0G3Hz2ysY8MQf9IuWMXYuv8XRiGZyYz6PkK4rrC8j-oKpRVdHAKxmnGZWO-N0mqhnVw0my8a8Fe02261OwomG8vLdg_Wr8hPxgreGmOCu4Oi1hLhL4-c"
+    }
+  }
+}

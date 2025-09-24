@@ -1,0 +1,180 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "student@example.com",
+      "password": "password123",
+      "name": "John Doe",
+      "role": "student",
+      "college": "MIT",
+      "department": "Computer Science",
+      "year": 3,
+      "phone": "+1234567890",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
+      "createdAt": "2024-01-15T10:00:00Z",
+      "isActive": true
+    },
+    {
+      "id": 2,
+      "email": "college@example.com",
+      "password": "password123",
+      "name": "Dr. Jane Smith",
+      "role": "college",
+      "collegeName": "MIT",
+      "position": "Innovation Director",
+      "phone": "+1234567891",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150",
+      "createdAt": "2024-01-10T10:00:00Z",
+      "isActive": true
+    },
+    {
+      "id": 3,
+      "email": "incubator@example.com",
+      "password": "password123",
+      "name": "Alex Johnson",
+      "role": "incubator",
+      "organizationName": "TechStart Incubator",
+      "position": "Program Manager",
+      "region": "Boston",
+      "phone": "+1234567892",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+      "createdAt": "2024-01-05T10:00:00Z",
+      "isActive": true
+    }
+  ],
+  "ideas": [
+    {
+      "id": 1,
+      "title": "AI-Powered Study Assistant",
+      "description": "An intelligent tutoring system that adapts to individual learning styles and provides personalized study recommendations.",
+      "category": "Education Technology",
+      "techStack": ["React", "Python", "TensorFlow", "MongoDB"],
+      "status": "pending",
+      "studentId": 1,
+      "studentName": "John Doe",
+      "college": "MIT",
+      "submittedAt": "2024-01-20T10:00:00Z",
+      "files": [
+        {
+          "name": "proposal.pdf",
+          "url": "/files/proposal.pdf",
+          "type": "application/pdf"
+        }
+      ],
+      "teamMembers": [
+        {
+          "name": "John Doe",
+          "role": "Team Lead",
+          "email": "john@example.com"
+        },
+        {
+          "name": "Sarah Wilson",
+          "role": "Developer",
+          "email": "sarah@example.com"
+        }
+      ],
+      "endorsements": [],
+      "comments": [],
+      "views": 45,
+      "likes": 12
+    },
+    {
+      "id": 2,
+      "title": "Sustainable Energy Monitor",
+      "description": "IoT-based system for monitoring and optimizing energy consumption in smart buildings.",
+      "category": "Green Technology",
+      "techStack": ["Arduino", "React", "Node.js", "InfluxDB"],
+      "status": "endorsed",
+      "studentId": 1,
+      "studentName": "John Doe",
+      "college": "MIT",
+      "submittedAt": "2024-01-18T10:00:00Z",
+      "files": [],
+      "teamMembers": [
+        {
+          "name": "John Doe",
+          "role": "Team Lead",
+          "email": "john@example.com"
+        }
+      ],
+      "endorsements": [
+        {
+          "id": 1,
+          "collegeId": 2,
+          "collegeName": "MIT",
+          "endorsedBy": "Dr. Jane Smith",
+          "status": "approved",
+          "comments": "Excellent concept with strong market potential.",
+          "endorsedAt": "2024-01-22T10:00:00Z"
+        }
+      ],
+      "comments": [
+        {
+          "id": 1,
+          "userId": 3,
+          "userName": "Alex Johnson",
+          "userRole": "incubator",
+          "comment": "This has great potential. Would love to discuss further.",
+          "createdAt": "2024-01-23T10:00:00Z"
+        }
+      ],
+      "views": 78,
+      "likes": 23
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Idea Endorsed",
+      "message": "Your idea 'Sustainable Energy Monitor' has been endorsed by MIT",
+      "type": "endorsement",
+      "read": false,
+      "createdAt": "2024-01-22T10:00:00Z",
+      "actionUrl": "/ideas/2"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "title": "New Comment",
+      "message": "Alex Johnson commented on your idea 'Sustainable Energy Monitor'",
+      "type": "comment",
+      "read": false,
+      "createdAt": "2024-01-23T10:00:00Z",
+      "actionUrl": "/ideas/2"
+    }
+  ],
+  "analytics": {
+    "dashboard": {
+      "totalIdeas": 150,
+      "pendingIdeas": 45,
+      "endorsedIdeas": 78,
+      "rejectedIdeas": 27,
+      "totalStudents": 1250,
+      "activeColleges": 25,
+      "incubationCenters": 8,
+      "successRate": 68.5
+    },
+    "ideas": {
+      "byCategory": [
+        { "category": "Education Technology", "count": 35 },
+        { "category": "Green Technology", "count": 28 },
+        { "category": "Healthcare", "count": 22 },
+        { "category": "Fintech", "count": 18 },
+        { "category": "E-commerce", "count": 15 }
+      ],
+      "byStatus": [
+        { "status": "pending", "count": 45 },
+        { "status": "endorsed", "count": 78 },
+        { "status": "rejected", "count": 27 }
+      ],
+      "monthlySubmissions": [
+        { "month": "Jan", "count": 25 },
+        { "month": "Feb", "count": 32 },
+        { "month": "Mar", "count": 28 },
+        { "month": "Apr", "count": 35 },
+        { "month": "May", "count": 30 }
+      ]
+    }
+  }
+}

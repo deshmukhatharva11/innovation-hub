@@ -1,0 +1,374 @@
+{
+  "tech_stack": [
+    "Node.js",
+    "Express.js", 
+    "React",
+    "SQLite3",
+    "Sequelize ORM",
+    "Redux Toolkit",
+    "JWT Authentication",
+    "Tailwind CSS",
+    "React Router DOM",
+    "Formik & Yup",
+    "Axios",
+    "Multer",
+    "bcryptjs"
+  ],
+  "features": [
+    {
+      "name": "Authentication System",
+      "description": "Multi-role authentication with JWT tokens supporting Student, College Admin, Incubator Manager, and System Admin roles",
+      "files": [
+        "backend/routes/auth.js",
+        "backend/middleware/auth.js",
+        "frontend/src/features/auth"
+      ],
+      "api_doc": {
+        "openapi": "3.0.0",
+        "paths": {
+          "/api/auth/register": {
+            "post": {
+              "summary": "User registration",
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "name": {"type": "string"},
+                        "email": {"type": "string"},
+                        "password": {"type": "string"},
+                        "role": {"type": "string", "enum": ["student", "college_admin", "incubator_manager", "admin"]},
+                        "organization": {"type": "string"},
+                        "phone": {"type": "string"},
+                        "department": {"type": "string"}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/auth/login": {
+            "post": {
+              "summary": "User login",
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "email": {"type": "string"},
+                        "password": {"type": "string"}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/auth/me": {
+            "get": {
+              "summary": "Get current user profile",
+              "security": [{"bearerAuth": []}]
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Student Management",
+      "description": "Complete student directory and management system for college admins",
+      "files": [
+        "backend/routes/users.js",
+        "frontend/src/features/admin/StudentManagement.jsx"
+      ],
+      "api_doc": {
+        "openapi": "3.0.0",
+        "paths": {
+          "/api/users/students": {
+            "get": {
+              "summary": "Get students list filtered by college",
+              "security": [{"bearerAuth": []}],
+              "parameters": [
+                {
+                  "name": "college_id",
+                  "in": "query",
+                  "schema": {"type": "integer"}
+                }
+              ]
+            }
+          },
+          "/api/users/{id}": {
+            "get": {
+              "summary": "Get user profile by ID",
+              "security": [{"bearerAuth": []}],
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {"type": "integer"}
+                }
+              ]
+            },
+            "put": {
+              "summary": "Update user profile",
+              "security": [{"bearerAuth": []}],
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {"type": "integer"}
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Idea Management System",
+      "description": "Complete CRUD operations for ideas with multi-stage review process",
+      "files": [
+        "backend/routes/ideas.js",
+        "frontend/src/features/ideas",
+        "frontend/src/features/submit-idea"
+      ],
+      "api_doc": {
+        "openapi": "3.0.0",
+        "paths": {
+          "/api/ideas": {
+            "get": {
+              "summary": "Get ideas list with filtering",
+              "security": [{"bearerAuth": []}],
+              "parameters": [
+                {
+                  "name": "status",
+                  "in": "query",
+                  "schema": {"type": "string"}
+                },
+                {
+                  "name": "category",
+                  "in": "query", 
+                  "schema": {"type": "string"}
+                }
+              ]
+            },
+            "post": {
+              "summary": "Create new idea",
+              "security": [{"bearerAuth": []}],
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "title": {"type": "string"},
+                        "description": {"type": "string"},
+                        "category": {"type": "string"},
+                        "status": {"type": "string", "enum": ["draft", "submitted"]}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/api/ideas/{id}/status": {
+            "put": {
+              "summary": "Update idea status (endorsement/rejection)",
+              "security": [{"bearerAuth": []}],
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {"type": "integer"}
+                }
+              ],
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "status": {"type": "string", "enum": ["endorsed", "rejected", "under_review"]},
+                        "feedback": {"type": "string"}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "College Dashboard",
+      "description": "Comprehensive dashboard for college administrators with analytics and student management",
+      "files": [
+        "frontend/src/features/dashboard/CollegeDashboard.jsx",
+        "backend/routes/analytics.js"
+      ],
+      "api_doc": {
+        "openapi": "3.0.0",
+        "paths": {
+          "/api/analytics/dashboard": {
+            "get": {
+              "summary": "Get dashboard analytics",
+              "security": [{"bearerAuth": []}],
+              "parameters": [
+                {
+                  "name": "timeRange",
+                  "in": "query",
+                  "schema": {"type": "string", "enum": ["7d", "30d", "90d", "1y"]}
+                }
+              ]
+            }
+          },
+          "/api/analytics/departments": {
+            "get": {
+              "summary": "Get department-wise analytics",
+              "security": [{"bearerAuth": []}]
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "College Management",
+      "description": "CRUD operations for college information and statistics",
+      "files": [
+        "backend/routes/colleges.js",
+        "frontend/src/features/admin"
+      ],
+      "api_doc": {
+        "openapi": "3.0.0",
+        "paths": {
+          "/api/colleges": {
+            "get": {
+              "summary": "Get colleges list",
+              "security": [{"bearerAuth": []}]
+            },
+            "post": {
+              "summary": "Create new college",
+              "security": [{"bearerAuth": []}]
+            }
+          },
+          "/api/colleges/{id}": {
+            "get": {
+              "summary": "Get college details",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {"type": "integer"}
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Profile Management",
+      "description": "User profile viewing and editing functionality",
+      "files": [
+        "frontend/src/features/profile/Profile.jsx",
+        "backend/routes/users.js"
+      ],
+      "api_doc": {
+        "openapi": "3.0.0",
+        "paths": {
+          "/api/users/{id}": {
+            "put": {
+              "summary": "Update user profile",
+              "security": [{"bearerAuth": []}],
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "name": {"type": "string"},
+                        "phone": {"type": "string"},
+                        "department": {"type": "string"},
+                        "bio": {"type": "string"}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Notification System", 
+      "description": "Real-time notifications and email system",
+      "files": [
+        "backend/routes/notifications.js",
+        "frontend/src/features/notifications"
+      ],
+      "api_doc": {
+        "openapi": "3.0.0",
+        "paths": {
+          "/api/notifications": {
+            "get": {
+              "summary": "Get user notifications",
+              "security": [{"bearerAuth": []}]
+            }
+          },
+          "/api/notifications/unread-count": {
+            "get": {
+              "summary": "Get unread notifications count",
+              "security": [{"bearerAuth": []}]
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Incubator Management",
+      "description": "Management system for incubators and their operations",
+      "files": [
+        "backend/routes/incubators.js",
+        "frontend/src/features/incubator"
+      ],
+      "api_doc": {
+        "openapi": "3.0.0",
+        "paths": {
+          "/api/incubators": {
+            "get": {
+              "summary": "Get incubators list",
+              "security": [{"bearerAuth": []}]
+            }
+          },
+          "/api/incubators/{id}": {
+            "get": {
+              "summary": "Get incubator details",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path", 
+                  "required": true,
+                  "schema": {"type": "integer"}
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}
