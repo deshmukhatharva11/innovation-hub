@@ -1,0 +1,17 @@
+node_modules
+frontend/node_modules
+backend/node_modules
+.git
+.gitignore
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+uploads
+*.sqlite
+*.db
+.env
+.env.local
+.env.production
+.env.development
