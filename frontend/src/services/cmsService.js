@@ -1,9 +1,10 @@
 import axios from 'axios';
+import { mockApi } from './mockApi';
 
 // Create axios instance for CMS API
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:3001/api',
-  timeout: 10000, // 10 second timeout
+  baseURL: process.env.REACT_APP_API_URL || 'https://backend-1cpccsqwi-shris-projects-68144c68.vercel.app/api',
+  timeout: 5000, // 5 second timeout
 });
 
 // Request interceptor to add token
@@ -51,8 +52,9 @@ export const cmsService = {
       });
       return response.data;
     } catch (error) {
-      console.error('Error fetching latest circulars:', error);
-      throw error;
+      console.error('Error fetching latest circulars, using mock data:', error);
+      // Fallback to mock data
+      return mockApi.getCirculars();
     }
   },
 
@@ -82,8 +84,9 @@ export const cmsService = {
       const response = await api.get(`/public/cms/statistics`);
       return response.data;
     } catch (error) {
-      console.error('Error fetching portal statistics:', error);
-      throw error;
+      console.error('Error fetching portal statistics, using mock data:', error);
+      // Fallback to mock data
+      return mockApi.getStats();
     }
   },
 
