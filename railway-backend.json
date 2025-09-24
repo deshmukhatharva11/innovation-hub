@@ -1,0 +1,17 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "name": "innovation-hub-backend",
+  "services": [
+    {
+      "name": "backend",
+      "buildCommand": "cd backend && npm install",
+      "startCommand": "cd backend && node server-production.js",
+      "root": "backend",
+      "environment": {
+        "NODE_ENV": "production",
+        "PORT": "3001",
+        "DB_TYPE": "sqlite"
+      }
+    }
+  ]
+}
