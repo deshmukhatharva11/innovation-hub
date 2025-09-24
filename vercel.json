@@ -5,26 +5,17 @@
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build"
+        "distDir": "frontend/build"
       }
-    },
-    {
-      "src": "backend/server-production.js",
-      "use": "@vercel/node"
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/backend/server-production.js"
-    },
     {
       "src": "/(.*)",
       "dest": "/frontend/build/$1"
     }
   ],
   "env": {
-    "NODE_ENV": "production",
-    "DB_TYPE": "postgresql"
+    "NODE_ENV": "production"
   }
 }
