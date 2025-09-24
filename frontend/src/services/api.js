@@ -16,7 +16,7 @@ const cancelPreviousRequest = (key, forceCancel = false) => {
 
 // Create axios instance
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:3001/api',
+  baseURL: process.env.REACT_APP_API_URL || 'https://backend-45p24bs5o-shris-projects-68144c68.vercel.app/api',
   timeout: 10000, // 10 second timeout
 });
 
