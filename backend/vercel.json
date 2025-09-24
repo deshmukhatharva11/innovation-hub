@@ -9,12 +9,19 @@
     },
     "api/static.js": {
       "maxDuration": 10
+    },
+    "api/init-db.js": {
+      "maxDuration": 10
     }
   },
   "routes": [
     {
       "src": "/health",
       "dest": "/api/health.js"
+    },
+    {
+      "src": "/init-db",
+      "dest": "/api/init-db.js"
     },
     {
       "src": "/api/public/cms/circulars",
