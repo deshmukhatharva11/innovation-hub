@@ -1,55 +1,18 @@
 {
   "version": 2,
-  "functions": {
-    "api/health.js": {
-      "maxDuration": 10
-    },
-    "api/data.js": {
-      "maxDuration": 10
-    },
-    "api/static.js": {
-      "maxDuration": 10
-    },
-    "api/init-db.js": {
-      "maxDuration": 10
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
     }
-  },
+  ],
   "routes": [
     {
-      "src": "/health",
-      "dest": "/api/health.js"
-    },
-    {
-      "src": "/init-db",
-      "dest": "/api/init-db.js"
-    },
-    {
-      "src": "/api/public/cms/circulars",
-      "dest": "/api/data.js"
-    },
-    {
-      "src": "/api/public/cms/statistics",
-      "dest": "/api/data.js"
-    },
-    {
-      "src": "/api/public/cms/colleges",
-      "dest": "/api/data.js"
-    },
-    {
-      "src": "/api/public/cms/documents",
-      "dest": "/api/data.js"
-    },
-    {
-      "src": "/uploads/(.*)",
-      "dest": "/api/static.js"
-    },
-    {
-      "src": "/images/(.*)",
-      "dest": "/api/static.js"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/api/data.js"
+      "dest": "/server.js"
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
