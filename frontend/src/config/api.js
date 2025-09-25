@@ -3,7 +3,7 @@ const getApiUrl = () => {
   // Check if we're in production
   if (process.env.NODE_ENV === 'production') {
     // Use environment variable if available, otherwise use deployed backend
-    return process.env.REACT_APP_API_URL || 'https://backend-45p24bs5o-shris-projects-68144c68.vercel.app/api';
+    return process.env.REACT_APP_API_URL || 'https://web-production-33931.up.railway.app/api';
   }
   
   // Development environment
