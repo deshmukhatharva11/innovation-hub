@@ -61,22 +61,27 @@ const connectDB = async () => {
     
     // Import and sync models if database is available
     try {
-      require('./models/User');
-      require('./models/College');
-      require('./models/Idea');
-      require('./models/Mentor');
-      require('./models/Admin');
-      require('./models/Circular');
-      require('./models/Document');
-      require('./models/Notification');
-      require('./models/Event');
-      require('./models/Chat');
-      require('./models/Audit');
-      require('./models/Statistics');
-      
-      await sequelize.sync({ alter: true });
-      console.log('✅ Database models synchronized successfully');
-      dbConnected = true;
+      // Only import models if we're using PostgreSQL (not SQLite)
+      if (process.env.DATABASE_URL && process.env.DATABASE_URL.includes('postgresql://')) {
+        require('./models/User');
+        require('./models/College');
+        require('./models/Idea');
+        require('./models/Mentor');
+        require('./models/Admin');
+        require('./models/Circular');
+        require('./models/Document');
+        require('./models/Notification');
+        require('./models/Event');
+        require('./models/Chat');
+        require('./models/Audit');
+        require('./models/Statistics');
+        
+        await sequelize.sync({ alter: true });
+        console.log('✅ Database models synchronized successfully');
+        dbConnected = true;
+      } else {
+        console.log('⚠️ Not using PostgreSQL, skipping model sync');
+      }
     } catch (modelError) {
       console.log('⚠️ Model sync failed, continuing without database features:', modelError.message);
     }
