@@ -12,15 +12,29 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || "*",
+    origin: [
+      process.env.FRONTEND_URL,
+      "https://frontend-ga3w8f8se-shris-projects-68144c68.vercel.app",
+      "https://frontend-aeelrbljj-shris-projects-68144c68.vercel.app",
+      "http://localhost:3000",
+      "http://localhost:3001"
+    ].filter(Boolean),
     methods: ["GET", "POST"]
   }
 });
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "*",
-  credentials: true
+  origin: [
+    process.env.FRONTEND_URL,
+    "https://frontend-ga3w8f8se-shris-projects-68144c68.vercel.app",
+    "https://frontend-aeelrbljj-shris-projects-68144c68.vercel.app",
+    "http://localhost:3000",
+    "http://localhost:3001"
+  ].filter(Boolean),
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
