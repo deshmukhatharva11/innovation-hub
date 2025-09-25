@@ -476,13 +476,17 @@ async function startServer() {
     await sequelize.authenticate();
     console.log('✅ Database connection established successfully.');
 
-    // SQLite tuning; tolerate lock errors so startup never fails
-    try { await sequelize.query('PRAGMA busy_timeout = 5000;'); } catch (_) {}
-    try { await sequelize.query("PRAGMA journal_mode = WAL;"); } catch (_) {}
-    try { await sequelize.query("PRAGMA synchronous = NORMAL;"); } catch (_) {}
-
-    // Disable foreign key checks
-    await sequelize.query('PRAGMA foreign_keys = OFF;');
+    // PostgreSQL-specific optimizations (skip SQLite PRAGMA commands)
+    if (sequelize.getDialect() === 'postgres') {
+      console.log('✅ Using PostgreSQL database');
+    } else {
+      // SQLite tuning; tolerate lock errors so startup never fails
+      try { await sequelize.query('PRAGMA busy_timeout = 5000;'); } catch (_) {}
+      try { await sequelize.query("PRAGMA journal_mode = WAL;"); } catch (_) {}
+      try { await sequelize.query("PRAGMA synchronous = NORMAL;"); } catch (_) {}
+      // Disable foreign key checks
+      await sequelize.query('PRAGMA foreign_keys = OFF;');
+    }
 
     // Sync database models (in development)
     if (process.env.NODE_ENV === 'development') {
