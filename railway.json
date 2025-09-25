@@ -1,32 +1,14 @@
 ﻿{
   "$schema": "https://railway.app/railway.schema.json",
-  "name": "innovation-hub",
-  "services": [
-    {
-      "name": "backend",
-      "buildCommand": "cd backend && npm install",
-      "startCommand": "cd backend && node server-railway.js",
-      "root": "backend",
-      "environment": {
-        "NODE_ENV": "production",
-        "PORT": "3001",
-        "DB_TYPE": "postgresql",
-        "DB_HOST": "${{PostgreSQL.HOST}}",
-        "DB_PORT": "${{PostgreSQL.PORT}}",
-        "DB_NAME": "${{PostgreSQL.DATABASE}}",
-        "DB_USER": "${{PostgreSQL.USERNAME}}",
-        "DB_PASSWORD": "${{PostgreSQL.PASSWORD}}"
-      }
-    },
-    {
-      "name": "frontend",
-      "buildCommand": "cd frontend && npm install && npm run build",
-      "startCommand": "cd frontend && npx serve -s build -l $PORT",
-      "root": "frontend",
-      "environment": {
-        "NODE_ENV": "production",
-        "REACT_APP_API_URL": "https://innovation-hub-backend-production.up.railway.app/api"
-      }
-    }
-  ]
+  "name": "innovation-hub-backend",
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "startCommand": "npm start",
+    "healthcheckPath": "/health",
+    "healthcheckTimeout": 100,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  }
 }

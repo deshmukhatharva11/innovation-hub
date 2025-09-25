@@ -1,1 +1,1 @@
-web: cd backend && npm install --production && node server-production.js
+web: cd backend && npm install && node server-railway.js

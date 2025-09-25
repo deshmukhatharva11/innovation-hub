@@ -82,8 +82,39 @@ const testConnection = async () => {
   }
 };
 
+// Connect to database and sync models
+const connectDB = async () => {
+  try {
+    await testConnection();
+    
+    // Import all models
+    require('../models/User');
+    require('../models/College');
+    require('../models/Idea');
+    require('../models/Mentor');
+    require('../models/Admin');
+    require('../models/Circular');
+    require('../models/Document');
+    require('../models/Notification');
+    require('../models/Event');
+    require('../models/Chat');
+    require('../models/Audit');
+    require('../models/Statistics');
+    
+    // Sync database (create tables if they don't exist)
+    await sequelize.sync({ alter: true });
+    console.log('✅ Database models synchronized successfully');
+    
+    return true;
+  } catch (error) {
+    console.error('❌ Database connection/sync failed:', error);
+    throw error;
+  }
+};
+
 module.exports = {
   sequelize,
   testConnection,
+  connectDB,
   config
 };
