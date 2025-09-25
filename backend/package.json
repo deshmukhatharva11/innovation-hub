@@ -10,6 +10,7 @@
     "test:watch": "jest --watch",
     "db:migrate": "node scripts/migrate.js",
     "db:seed": "node scripts/seed.js",
+    "db:seed-comprehensive": "node seed-database.js",
     "db:reset": "node scripts/reset.js"
   },
   "keywords": [
