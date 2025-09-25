@@ -4,9 +4,10 @@
   "description": "Innovation Hub - Fresh Railway Deployment",
   "main": "backend/server-railway.js",
   "scripts": {
-    "start": "cd backend && npm install && node server-railway.js",
+    "start": "cd backend && node server-railway.js",
     "build": "echo 'No build step required for backend'",
-    "dev": "cd backend && npm run dev"
+    "dev": "cd backend && npm run dev",
+    "postinstall": "cd backend && npm install"
   },
   "keywords": [
     "innovation",
