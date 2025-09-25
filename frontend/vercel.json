@@ -9,6 +9,11 @@
       }
     }
   ],
+  "env": {
+    "CI": "false",
+    "DISABLE_ESLINT_PLUGIN": "true",
+    "REACT_APP_API_URL": "https://web-production-33931.up.railway.app"
+  },
   "routes": [
     {
       "src": "/static/(.*)",

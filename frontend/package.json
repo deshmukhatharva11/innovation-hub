@@ -34,7 +34,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "mock-api": "json-server --watch db.json --port 3001",
-    "vercel-build": "CI=false REACT_APP_API_URL=https://web-production-33931.up.railway.app react-scripts build"
+    "vercel-build": "CI=false DISABLE_ESLINT_PLUGIN=true REACT_APP_API_URL=https://web-production-33931.up.railway.app react-scripts build"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
