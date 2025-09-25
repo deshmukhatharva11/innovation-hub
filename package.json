@@ -2,9 +2,9 @@
   "name": "innovation-hub-fresh",
   "version": "1.0.0",
   "description": "Innovation Hub - Fresh Railway Deployment",
-  "main": "backend/server-railway.js",
+  "main": "backend/server-railway-simple.js",
   "scripts": {
-    "start": "cd backend && node server-railway.js",
+    "start": "cd backend && node server-railway-simple.js",
     "build": "echo 'No build step required for backend'",
     "dev": "cd backend && npm run dev",
     "postinstall": "cd backend && npm install"
