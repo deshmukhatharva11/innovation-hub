@@ -354,7 +354,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchSuccessStories = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/ideas?status=incubated&limit=3');
+        const response = await fetch(`${process.env.REACT_APP_API_URL || 'https://web-production-33931.up.railway.app'}/api/ideas?status=incubated&limit=3`);
         if (response.ok) {
           const data = await response.json();
           if (data.success && data.data.ideas) {
