@@ -1,36 +1,54 @@
 const { Sequelize } = require('sequelize');
-const path = require('path');
 
-// Database configuration - Using SQLite for simplicity
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: path.join(__dirname, '../../database.sqlite'),
-  logging: process.env.NODE_ENV === 'development' ? console.log : false,
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
-  },
-  dialectOptions: {
-    timeout: 30000
-  },
-  define: {
-    timestamps: true,
-    underscored: true,
-    freezeTableName: true
-  },
-  retry: {
-    match: [
-      /SQLITE_BUSY/,
-    ],
-    name: 'query',
-    backoffBase: 100,
-    backoffExponent: 1.1,
-    timeout: 60000,
-    max: 3
+// Database configuration - Using PostgreSQL for Vercel compatibility
+const sequelize = new Sequelize(
+  process.env.DATABASE_URL || 'postgresql://postgres:password@localhost:5432/innovation_hub',
+  {
+    dialect: 'postgres',
+    logging: process.env.NODE_ENV === 'development' ? console.log : false,
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    },
+    dialectOptions: {
+      ssl: process.env.NODE_ENV === 'production' ? {
+        require: true,
+        rejectUnauthorized: false
+      } : false
+    },
+    define: {
+      timestamps: true,
+      underscored: true,
+      freezeTableName: true
+    },
+    retry: {
+      match: [
+        /ETIMEDOUT/,
+        /EHOSTUNREACH/,
+        /ECONNRESET/,
+        /ECONNREFUSED/,
+        /ETIMEDOUT/,
+        /ESOCKETTIMEDOUT/,
+        /EHOSTUNREACH/,
+        /EPIPE/,
+        /EAI_AGAIN/,
+        /SequelizeConnectionError/,
+        /SequelizeConnectionRefusedError/,
+        /SequelizeHostNotFoundError/,
+        /SequelizeHostNotReachableError/,
+        /SequelizeInvalidConnectionError/,
+        /SequelizeConnectionTimedOutError/
+      ],
+      name: 'query',
+      backoffBase: 100,
+      backoffExponent: 1.1,
+      timeout: 60000,
+      max: 3
+    }
   }
-});
+);
 
 // Test database connection
 const testConnection = async () => {
